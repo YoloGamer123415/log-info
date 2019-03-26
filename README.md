@@ -17,14 +17,14 @@ yarn add log-info
 
 Add this to your script:
 ```javascript
-require('info-log');
+require('log-info');
 ```
 
 And if you now run this:
 ```javascript
-require('info-log');
+require('log-info');
 
-console.log('I\'am using info-log!')
+console.log('I\'am using log-info!')
 ```
 You should see something like this:
 
@@ -36,7 +36,7 @@ It also works with clusters:
 const numCPUs = require('os').cpus().length;
 const cluster = require('cluster');
 
-require('../log');
+require('log-info');
 
 if (cluster.isMaster) {
 
@@ -74,7 +74,7 @@ Can be set to one of the following:
 
 Example:
 ```javascript
-require('info-log')({
+require('log-info')({
     time: 'none'
 });
 
@@ -92,7 +92,7 @@ Can be set to the following:
 
 Example:
 ```javascript
-require('info-log')({
+require('log-info')({
     pid: false
 });
 
@@ -110,7 +110,7 @@ Can be set to the following:
 
 Example:
 ```javascript
-require('info-log')({
+require('log-info')({
     info: false
 });
 
@@ -129,7 +129,7 @@ You can set it to whatever you want as long as it is a string!
 
 Example:
 ```javascript
-require('info-log')({
+require('log-info')({
     char: [ '=>', '<=' ]
 });
 
@@ -141,4 +141,4 @@ Will result in:
 
 ## Credits
 
-I used some of the code from [Bahamas10's log-prefix](https://www.npmjs.com/package/log-prefix) and modified it a bit to make info-log.
+I used some of the code from [Bahamas10's log-prefix](https://www.npmjs.com/package/log-prefix) and modified it a bit to make log-info.
