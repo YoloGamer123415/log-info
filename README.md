@@ -68,7 +68,7 @@ You can configure some options to customize the output to your likings.
 ### Options.time
 
 Can be set to one of the following:
-- `normal` - Gives the standard time output, e.g. `26-02-2019 15:42:23.463`. (default value)
+- `normal` - Gives the standard time output, e.g. `26-03-2019 15:42:23.463`. (default value)
 - `iso` - Gives the time in ISO format, e.g. `2019-03-26T14:42:23.463Z`
 - `none` - Gives no time output.
 

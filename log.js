@@ -41,7 +41,7 @@ function patch(options = {
                 case 'none':
                     break;
                 default:
-                    temp += `${options.char[0].toString() || '['}${colors.cyan} ${new Date().getDate().toString().padStart(2, '0')}-${new Date().getMonth().toString().padStart(2, '0')}-${new Date().getFullYear()} ${new Date().getHours().toString().padStart(2, '0')}:${new Date().getMinutes().toString().padStart(2, '0')}:${new Date().getSeconds().toString().padStart(2, '0')}.${new Date().getMilliseconds().toString().padStart(3, '0')} ${colors.reset}${options.char[1].toString() || ']'}`
+                    temp += `${options.char[0].toString() || '['}${colors.cyan} ${new Date().getDate().toString().padStart(2, '0')}-${(new Date().getMonth() + 1).toString().padStart(2, '0')}-${new Date().getFullYear()} ${new Date().getHours().toString().padStart(2, '0')}:${new Date().getMinutes().toString().padStart(2, '0')}:${new Date().getSeconds().toString().padStart(2, '0')}.${new Date().getMilliseconds().toString().padStart(3, '0')} ${colors.reset}${options.char[1].toString() || ']'}`
                     break;
             }
 
