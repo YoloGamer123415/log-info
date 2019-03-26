@@ -120,6 +120,25 @@ Will result in:
 
 ![Output of the example above.](https://imgur.com/AuGiQGW.png)
 
+### Options.char
+
+You can set it to whatever you want as long as it is a string!
+
+- `options.char[0]` - The character to put on the left of the information. (`[` is the default)
+- `options.char[1]` - The character to put on the right of the information. (`]` is the default)
+
+Example:
+```javascript
+require('info-log')({
+    char: [ '=>', '<=' ]
+});
+
+console.log('A log with a custom character!');
+```
+Will result in:
+
+![Output of the example above.](https://imgur.com/z7Lo4WD.png)
+
 ## Credits
 
 I used some of the code from [Bahamas10's log-prefix](https://www.npmjs.com/package/log-prefix) and modified it a bit to make info-log.
