@@ -1,0 +1,17 @@
+{
+  "name": "log-info",
+  "version": "1.1.0",
+  "description": "A npm package to log information with your logs.",
+  "main": "log.js",
+  "author": "YoloGamer123415",
+  "repository": {
+    "url": "https://github.com/YoloGamer123415/log-info"
+  },
+  "keywords": [
+    "console",
+    "logging",
+    "information"
+  ],
+  "license": "MIT",
+  "private": false
+}
