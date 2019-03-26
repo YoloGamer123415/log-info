@@ -24,11 +24,11 @@ And if you now run this:
 ```javascript
 require('log-info');
 
-console.log('I\'am using log-info!')
+console.log('I\'m using log-info!')
 ```
 You should see something like this:
 
-![Output of example above.](https://imgur.com/KKrwSPN.png)
+![Output of example above.](https://imgur.com/FY4PUfU.png)
 
 It also works with clusters:
 
