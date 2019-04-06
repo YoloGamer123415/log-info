@@ -88,7 +88,7 @@ Will result in:
 
 Can be set to the following:
 - `true` - Adds the pid of the process after the time. If it is the master process, it will be colored purple. (default value)
-- `false` - Rremoves the pid of the output.
+- `false` - Removes the pid of the output.
 
 Example:
 ```javascript
@@ -118,7 +118,7 @@ console.log('A log whitout info!');
 ```
 Will result in:
 
-![Output of the example above.](https://imgur.com/AuGiQGW.png)
+![Output of the example above.](https://imgur.com/ikTUXMj.png)
 
 ### Options.char
 
