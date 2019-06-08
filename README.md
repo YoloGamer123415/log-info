@@ -63,7 +63,7 @@ Should look something like this:
 
 ## Colors
 
-You can add colors to your `console.log`'s now, the syntacs is as follows:
+You can add colors to your `console.log`'s now, the syntax is as follows:
 ```
 [<color | hex color> <text>]
 ```

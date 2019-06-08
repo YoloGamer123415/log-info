@@ -1,6 +1,6 @@
 {
   "name": "log-info",
-  "version": "1.3.0",
+  "version": "1.3.1",
   "description": "A npm package to log information with your logs.",
   "main": "log.js",
   "author": "YoloGamer123415",
