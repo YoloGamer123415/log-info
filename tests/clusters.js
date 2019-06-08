@@ -5,11 +5,11 @@ require('../log');
 
 if (cluster.isMaster) {
 
-    console.log('Log from master!');
-    console.info('Info from master!');
-    console.warn('Warn from master!');
-    console.error('Error from master!');
-    console.debug('Debug from master!');
+    console.log('Log from %s!', 'master');
+    console.info('Info from %s!', 'master');
+    console.warn('Warn from %s!', 'master');
+    console.error('Error from %s!', 'master');
+    console.debug('Debug from %s!', 'master');
 
     for (var i = 0; i < numCPUs; i++) {
         cluster.fork();
@@ -17,6 +17,6 @@ if (cluster.isMaster) {
 
 } else {
 
-    console.log('Log from cluster!');
+    console.log('Log from %s!', 'cluster');
 
 }

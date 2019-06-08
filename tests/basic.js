@@ -1,3 +1,3 @@
 require('../log');
 
-console.log('I\'m using log-info!');
+console.log('I\'m using %s!', 'log-info');

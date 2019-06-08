@@ -1,67 +1,65 @@
-const util = require('util')
-const cluster = require('cluster')
+const supportsColor = require('supports-color').stdout
 
 const colors = {
-    black: "\x1b[30m",
-    red: "\x1b[31m",
-    green: "\x1b[32m",
-    yellow: "\x1b[33m",
-    blue: "\x1b[34m",
-    magenta: "\x1b[35m",
-    cyan: "\x1b[36m",
-    white: "\x1b[37m",
-    reset: "\x1b[0m"
+    ansi16: {
+        error: "\x1b[31m",  // red
+        info: "\x1b[32m",   // green
+        warn: "\x1b[33m",   // orange/ yellow
+        debug: "\x1b[34m",  // blue
+        pidM: "\x1b[35m",   // purple
+        date: "\x1b[36m",   // cyan
+        pid: "\x1b[37m",    // white
+        reset: "\x1b[0m"
+    },
+    ansi256: {
+        error: "\x1b[31m",  // red
+        info: "\x1b[32m",   // green
+        warn: "\x1b[33m",   // orange/ yellow
+        debug: "\x1b[34m",  // blue
+        pidM: "\x1b[35m",   // purple
+        date: "\x1b[36m",   // cyan
+        pid: "\x1b[37m",    // white
+        reset: "\x1b[0m"
+    },
+    ansi16m: {
+        error: "\u001B[38;2;255;37;37m",  // red
+        info: "\u001B[38;2;48;158;33m",   // green
+        warn: "\u001B[38;2;225;137;11m",  // orange
+        debug: "\u001B[38;2;52;73;255m",  // blue
+        pidM: "\u001B[38;2;183;36;255m",  // purple
+        date: "\u001B[38;2;33;150;255m",  // cyan/ light blue
+        pid: "\u001B[38;2;170;170;170m",  // gray
+        reset: "\x1b[0m"
+    }
 }
 
-var funcs = {
-    log: console.log.bind(console),
-    info: console.info.bind(console),
-    warn: console.warn.bind(console),
-    error: console.error.bind(console),
-    debug: (console.debug || console.log).bind(console)
+const colorFuncs = {
+    nocolors: require('./loggers/nocolor'),
+    ansi16: require('./loggers/ansi16'),
+    ansi256: require('./loggers/ansi256'),
+    ansi16m: require('./loggers/ansi16m')
 }
 
-module.exports = patch
+module.exports = log
 
-patch()
+log()
 
-function patch(options = {
+function log(options = {
     time: 'normal',
     pid:  true,
     info: true,
+    newline: true,
     char: [ '[', ']' ]
 }) {
-    Object.keys(funcs).forEach(function(k) {
-        console[k] = function() {
-            var temp = ''
-            switch (options.time) {
-                case 'iso':
-                    temp += `${options.char[0].toString() || '['}${colors.cyan} ${new Date().toISOString()} ${colors.reset}${options.char[1].toString() || ']'}`
-                    break;
-                case 'none':
-                    break;
-                default:
-                    temp += `${options.char[0].toString() || '['}${colors.cyan} ${new Date().getDate().toString().padStart(2, '0')}-${(new Date().getMonth() + 1).toString().padStart(2, '0')}-${new Date().getFullYear()} ${new Date().getHours().toString().padStart(2, '0')}:${new Date().getMinutes().toString().padStart(2, '0')}:${new Date().getSeconds().toString().padStart(2, '0')}.${new Date().getMilliseconds().toString().padStart(3, '0')} ${colors.reset}${options.char[1].toString() || ']'}`
-                    break;
-            }
-
-            if (options.pid !== false)
-                temp += ` ${options.char[0].toString() || '['}${cluster.isMaster ? colors.magenta : colors.white} ${process.pid} ${colors.reset}${options.char[1].toString() || ']'}`
-
-            if (options.info !== false && (k === 'log' || k === 'info')) {
-                temp += ` ${options.char[0].toString() || '['}${colors.green} INFO ${colors.reset}${options.char[1].toString() || ']'} `
-            } else if (options.info !== false && k === 'warn') {
-                temp += ` ${options.char[0].toString() || '['}${colors.yellow} WARN ${colors.reset}${options.char[1].toString() || ']'} `
-            } else if (options.info !== false && k === 'error') {
-                temp += ` ${options.char[0].toString() || '['}${colors.red} ERROR ${colors.reset}${options.char[1].toString() || ']'}`
-            } else if (options.info !== false && k === 'debug') {
-                temp += ` ${options.char[0].toString() || '['}${colors.blue} DEBUG ${colors.reset}${options.char[1].toString() || ']'}`
-            }
-
-            temp += ' %s'
-
-            arguments[0] = util.format(temp.trimLeft(), arguments[0])
-            funcs[k].apply(console, arguments)
-        }
-    })
+    if (supportsColor.has16m) {
+        colorFuncs['ansi16m'](options, colors.ansi16m)
+    } else
+    if (supportsColor.has256) {
+        colorFuncs['ansi256'](options, colors.ansi256)
+    } else
+    if (supportsColor.hasBasic) {
+        colorFuncs['ansi16'](options, colors.ansi16)
+    } else { // no color support or disabled
+        colorFuncs['nocolors'](options)
+    }
 }

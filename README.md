@@ -28,7 +28,7 @@ console.log('I\'m using log-info!')
 ```
 You should see something like this:
 
-![Output of example above.](https://imgur.com/FY4PUfU.png)
+![Output of example above.](https://imgur.com/4gANgo8.png)
 
 It also works with clusters:
 
@@ -40,11 +40,11 @@ require('log-info');
 
 if (cluster.isMaster) {
 
-    console.log('Log from master!');
-    console.info('Info from master!');
-    console.warn('Warn from master!');
-    console.error('Error from master!');
-    console.debug('Debug from master!');
+    console.log('Log from %s!', 'master');
+    console.info('Info from %s!', 'master');
+    console.warn('Warn from %s!', 'master');
+    console.error('Error from %s!', 'master');
+    console.debug('Debug from %s!', 'master');
 
     for (var i = 0; i < numCPUs; i++) {
         cluster.fork();
@@ -52,14 +52,40 @@ if (cluster.isMaster) {
 
 } else {
 
-    console.log('Log from cluster!');
+    console.log('Log from %s!', 'cluster');
 
 }
 ```
 
 Should look something like this:
 
-![Output of example above.](https://imgur.com/5e7dZPI.png)
+![Output of example above.](https://imgur.com/AEGsE6r.png)
+
+## Colors
+
+You can add colors to your `console.log`'s now, the syntacs is as follows:
+```
+[<color | hex color> <text>]
+```
+
+Example:
+```javascript
+require('log-info');
+
+console.log('[blue This text should be blue.]')
+
+console.log('[#00ff00 This text should be a bright %s.]', 'green')
+
+console.log('[cyan There should be] [#ff0000 multiple colors] in this text.')
+```
+
+You should see something like this:
+
+![Output of example above.](https://imgur.com/TxdSlVe.png)
+
+> If your console does not support more than 256 colors, you can not use hex colors, just the colors below:
+
+![All available colors](https://imgur.com/iEQo7a1.png)
 
 ## Options
 
@@ -82,13 +108,13 @@ console.log('A log whitout time!');
 ```
 Will result in:
 
-![Output of the example above.](https://imgur.com/AuGiQGW.png)
+![Output of the example above.](https://imgur.com/xMO7d1k.png)
 
 ### Options.pid
 
 Can be set to the following:
 - `true` - Adds the pid of the process after the time. If it is the master process, it will be colored purple. (default value)
-- `false` - Removes the pid of the output.
+- `false` - Rremoves the pid of the output.
 
 Example:
 ```javascript
@@ -100,7 +126,7 @@ console.log('A log whitout pid!');
 ```
 Will result in:
 
-![Output of the example above.](https://imgur.com/f17rhQx.png)
+![Output of the example above.](https://imgur.com/BmTz3vf.png)
 
 ### Options.info
 
@@ -118,7 +144,25 @@ console.log('A log whitout info!');
 ```
 Will result in:
 
-![Output of the example above.](https://imgur.com/ikTUXMj.png)
+![Output of the example above.](https://imgur.com/Fwd1E46.png)
+
+### Options.newline
+
+Can be set to the following:
+- `true` - Adds a return (newline) after all the info. (default value)
+- `false` - Does not add a return (newline) after all the info
+
+```javascript
+require('log-info')({
+    newline: false
+});
+
+console.log('A log without a newline!');
+```
+
+Will result in:
+
+![Output of the example above.](https://imgur.com/fgAtYFc.png)
 
 ### Options.char
 
@@ -137,7 +181,7 @@ console.log('A log with a custom character!');
 ```
 Will result in:
 
-![Output of the example above.](https://imgur.com/z7Lo4WD.png)
+![Output of the example above.](https://imgur.com/I37Yb6R.png)
 
 ## Credits
 
